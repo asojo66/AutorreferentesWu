@@ -203,7 +203,6 @@ class Wu(ThreeDSlide):
 
         self.play(Create(left_axes), run_time = 0.3)
 
-        self.next_slide()
         sphere2 = Sphere(radius=1, resolution=(12, 12))\
             .set_fill(blue_color, opacity=1).set_stroke(black_color, width=1)
         sphere2.rotate_about_origin(PI/2, RIGHT).shift(screen_witdth/4*RIGHT)
@@ -213,10 +212,6 @@ class Wu(ThreeDSlide):
         axis_line2 = DashedLine(axis_start, axis_end, dash_length=0.08).set_stroke(black_color, width=2)
         axis_arrow2 = Arrow(start=sphere2.get_center() + DOWN * 1.1, end=sphere2.get_center() + DOWN * 1.6, buff=0, tip_length=0.2)\
             .set_fill(black_color).set_stroke(width=0)
-
-        self.play(
-            FadeIn(sphere2)
-        )
 
         # Create 3D coordinate axes on the right side (mirror image reflected on y-z plane)
         right_axes = ThreeDAxes(
@@ -231,8 +226,8 @@ class Wu(ThreeDSlide):
         ).scale(0.4)
         right_axes.move_to(1.2*RIGHT)
 
-
-        self.play(Create(right_axes), run_time = 0.3)
+        self.play(FadeIn(sphere2),
+                  Create(right_axes), run_time = 0.3)
 
         self.next_slide(loop = True)
         self.play(
@@ -240,20 +235,77 @@ class Wu(ThreeDSlide):
             Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
         )
 
-        self.next_slide()
-        self.play(FadeIn(axis_line, run_time=0.2), FadeIn(axis_arrow, run_time=0.2))
-        self.next_slide()
-        self.play(FadeIn(axis_line2, run_time=0.2), FadeIn(axis_arrow2, run_time=0.2))
-        self.next_slide()
+        self.next_slide(loop = True)
+        self.add(axis_line, axis_arrow)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
+        )
+
+        self.next_slide(loop = True)
+        self.add(axis_line2, axis_arrow2)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
+        )
+        
 
         self.next_slide()
         self.play(
-            sphere2.animate.rotate(PI, RIGHT, about_point=sphere2.get_center()),
-            axis_line2.animate.rotate(PI, RIGHT, about_point=sphere2.get_center()),
-            axis_arrow2.animate.rotate(PI, RIGHT, about_point=sphere2.get_center())
+            Rotate(sphere2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+            Rotate(axis_line2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+            Rotate(axis_arrow2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center())
+        )
+
+        self.next_slide(loop = True)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=TAU, axis=UP), run_time=2, rate_func=linear
         )
 
         self.next_slide()
         self.play(FadeOut(sphere2), FadeOut(axis_line2), FadeOut(axis_arrow2))
 
+        self.next_slide(loop = True)
+        
+        econe = Cone(base_radius=1, height=2, direction=DOWN, fill_color=red_color, )\
+            .rotate(PI, RIGHT).move_to(sphere.get_bottom()).shift(-Y_AXIS-0.5*X_AXIS)
+        
+        econe2 = Cone(base_radius=1, height=2, direction=DOWN, fill_color=red_color)\
+            .rotate(PI, RIGHT).move_to(sphere2.get_bottom()).shift(-Y_AXIS-0.5*X_AXIS)
+        
+        self.add(econe)
+        self.play(Rotate(sphere, angle=TAU, axis=UP), run_time=2, rate_func=linear)
+
+        self.next_slide(loop = True)
+
+        axis_line2 = DashedLine(axis_start, axis_end, dash_length=0.08).set_stroke(black_color, width=2)
+        axis_arrow2 = Arrow(start=sphere2.get_center() + DOWN * 1.1, end=sphere2.get_center() + DOWN * 1.6, buff=0, tip_length=0.2)\
+            .set_fill(black_color).set_stroke(width=0)
+        
+        self.add(sphere2, axis_arrow2, axis_line2)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear)
+        
+        self.next_slide(loop = True)
+        self.add(econe2)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
+        )
+
         self.next_slide()
+        self.play(
+            Rotate(sphere2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+            Rotate(econe2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+            Rotate(axis_arrow2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+            Rotate(axis_line2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+        )
+
+        self.next_slide(loop = True)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=TAU, axis=UP),
+            run_time=2, rate_func=linear
+        )
