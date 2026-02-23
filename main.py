@@ -417,228 +417,323 @@ class Wu(ThreeDSlide):
         #       Teoría Tsung-Dao Lee y Chen-Ning Yang
         # -----------------------------------------------
 
-        # # -----------------------------------------------
-        # #                   SYMMETRY
-        # # -----------------------------------------------
+        self.next_slide()
+        self.fadeout_all()
 
-        # self.next_slide()
-        # self.fadeout_all()
+        title = Title("Teoría de Lee y Yang")
+        title.underline.set_color(black_color)
+        lee = ImageMobject("./assets/lee.jpg").scale_to_fit_height(3)
+        yang = ImageMobject("./assets/yang.jpg").scale_to_fit_height(3)
+        text1 = Tex(r"La paridad se converva en las fuerzas fuertes y electromagnéticas").scale(0.8)
+        text2 = Tex(r"Pero no en la débil...").scale(0.8)
+        text3 = Tex(r"Proponen un experimento a Wu, a la que le precede la fama").scale(0.8)
 
-        # square = Square(side_length=2, color = black_color, fill_color = blue_color, fill_opacity = 1)
-        # triangl = Triangle(color = black_color, fill_color = blue_color, fill_opacity = 1).scale_to_fit_width(2)
-        # circl = Circle(radius=1, color = black_color, fill_color = blue_color, fill_opacity = 1)
+        photos = Group(lee, yang).arrange(RIGHT, buff=2.5)
 
-        # objs = VGroup(circl, square, triangl).arrange(RIGHT, buff = 1.5)
-
-        # self.play(Create(objs))
-        # self.next_slide()
-
-        # def make_ccw_arrow(center_point, radius=0.6, start_angle=-PI/4, angle=PI*1.7):
-        #     arc = Arc(radius=radius, start_angle=start_angle, angle=angle)
-        #     arc.set_stroke(black_color, width=3)
-        #     # center the arc at the target center
-        #     arc.move_to(center_point)
-        #     # compute tangent at end to place arrow tip
-        #     p_end = arc.get_end()
-        #     p_before = arc.point_from_proportion(0.98)
-        #     direction = p_end - p_before
-        #     ang = np.arctan2(direction[1], direction[0])
-        #     tip = Triangle().scale(0.12).set_fill(black_color, opacity=1).set_stroke(width=0)
-        #     tip.move_to(p_end)
-        #     tip.set_angle(ang)
-        #     tip.shift(direction / np.linalg.norm(direction) * 0.05)
-        #     return VGroup(arc, tip)
-
-        # arrow1 = make_ccw_arrow(square.get_center(), radius=0.3)
-        # arrow2 = make_ccw_arrow(circl.get_center(), radius=0.3)
-        # arrow3 = make_ccw_arrow(triangl.get_center_of_mass(), radius=0.3)
-
-        # self.play(FadeIn(arrow1, run_time=0.18), FadeIn(arrow2, run_time=0.18), FadeIn(arrow3, run_time=0.18))
-        # self.play(Rotate(square, PI / 2),
-        #           Rotate(triangl, PI / 2, about_point=triangl.get_center_of_mass()),
-        #           Rotate(circl, PI / 2))
-        # self.play(FadeOut(arrow1, run_time=0.18), FadeOut(arrow2, run_time=0.18), FadeOut(arrow3, run_time=0.18))
-
-        # self.next_slide()
-        # # Dashed horizontal axis (x-axis) through each object's center for reflection
-        # dash1 = DashedLine(square.get_center() + LEFT * 1.5, square.get_center() + RIGHT * 1.5, dash_length=0.08)
-        # dash2 = DashedLine(circl.get_center() + LEFT * 1.5, circl.get_center() + RIGHT * 1.5, dash_length=0.08)
-        # dash3 = DashedLine(triangl.get_center_of_mass() + LEFT * 1.5, triangl.get_center_of_mass() + RIGHT * 1.5, dash_length=0.08)
-        # for d in (dash1, dash2, dash3):
-        #     d.set_stroke(black_color, width=2)
-
-        # self.play(FadeIn(dash1, run_time=0.12), FadeIn(dash2, run_time=0.12), FadeIn(dash3, run_time=0.12))
-        # self.play(square.animate.apply_matrix(np.array([[1, 0], [0, -1]])),
-        #           triangl.animate.apply_matrix(np.array([[1, 0], [0, -1]]), about_point=triangl.get_center_of_mass()),
-        #           circl.animate.apply_matrix(np.array([[1, 0], [0, -1]])))
-        # self.play(FadeOut(dash1, run_time=0.12), FadeOut(dash2, run_time=0.12), FadeOut(dash3, run_time=0.12))
-
-        # self.next_slide()
-        # # Dashed diagonal axis (y = x) through each object's center for reflection
-        # diag_vec = (RIGHT + UP)
-        # diag1 = DashedLine(square.get_center() - diag_vec * 1.5, square.get_center() + diag_vec * 1.5, dash_length=0.08)
-        # diag2 = DashedLine(circl.get_center() - diag_vec * 1.5, circl.get_center() + diag_vec * 1.5, dash_length=0.08)
-        # diag3 = DashedLine(triangl.get_center_of_mass() - diag_vec * 1.5, triangl.get_center_of_mass() + diag_vec * 1.5, dash_length=0.08)
-        # for d in (diag1, diag2, diag3):
-        #     d.set_stroke(black_color, width=2)
-
-        # self.play(FadeIn(diag1, run_time=0.12), FadeIn(diag2, run_time=0.12), FadeIn(diag3, run_time=0.12))
-        # self.play(square.animate.apply_matrix(np.array([[0, 1], [1, 0]]), about_point=square.get_center()),
-        #           triangl.animate.apply_matrix(np.array([[0, 1], [1, 0]]), about_point=triangl.get_center_of_mass()),
-        #           circl.animate.apply_matrix(np.array([[0, 1], [1, 0]]), about_point=circl.get_center()))
-        # self.play(FadeOut(diag1, run_time=0.12), FadeOut(diag2, run_time=0.12), FadeOut(diag3, run_time=0.12))
-
-        # self.fadeout_all()
-        # # -----------------------------------------------
-        # #              ROTATING 3D SPHERE
-        # # -----------------------------------------------
-
-        # self.renderer.camera.light_source.move_to(3*IN) # changes the source of the light
-
-        # self.next_slide()
-        # # Move camera to view from above
-        # self.set_camera_orientation(phi=-25*DEGREES)
-        # sphere = Sphere(radius=1, resolution=(12, 12))\
-        #     .set_fill(blue_color, opacity=1).set_stroke(black_color, width=1)
-        # sphere.rotate_about_origin(PI/2, RIGHT)
-
-        # self.play(FadeIn(sphere))
-
-        # self.next_slide(loop = True)
-        # self.play(Rotate(sphere, angle=TAU, axis=UP), run_time=2, rate_func=linear)
-
-        # self.next_slide()
-        # self.play(
-        #     sphere.animate.shift(screen_witdth/4*LEFT)
-        # )
-
-        # # Axis indicator: vertical dashed line with an arrow at the top
-        # axis_start = sphere.get_center() - UP * 1.6
-        # axis_end = sphere.get_center() + UP * 1.6
-        # axis_line = DashedLine(axis_start, axis_end, dash_length=0.08).set_stroke(black_color, width=2)
-        # axis_arrow = Arrow(start=sphere.get_center() + UP * 1.1, end=sphere.get_center() + UP * 1.6, buff=0, tip_length=0.2)\
-        #     .set_fill(black_color).set_stroke(width=0)
+        Group(
+            photos,
+            text1,
+            text2,
+            text3
+        ).arrange(DOWN, buff = 0.5).shift(0.5*DOWN)
         
-        # self.play(Create(Line(10*UP, 10*DOWN)))
+        self.next_slide()
+        self.play(Write(title))
+        self.next_slide()
+        self.play(FadeIn(photos))
+        self.next_slide()
+        self.play(Write(text1))
+        self.next_slide()
+        self.play(Write(text2))
+        self.next_slide()
+        self.play(Write(text3))
 
-        # # Create 3D coordinate axes on the left side of the white line
-        # left_axes = ThreeDAxes(
-        #     x_length=1,
-        #     y_length=1,
-        #     z_length=1,
-        #     x_range=[0, 1],
-        #     y_range=[0, 1],
-        #     z_range=[0, 1],
-        #     axis_config={"color": black_color, "stroke_width": 2},
-        #     tips=False
-        # ).scale(0.4)
-        # left_axes.move_to(1.2*LEFT)
+        # -----------------------------------------------
+        #                   SYMMETRY
+        # -----------------------------------------------
 
-        # self.play(Create(left_axes), run_time = 0.3)
+        self.next_slide()
+        self.fadeout_all()
 
-        # sphere2 = Sphere(radius=1, resolution=(12, 12))\
-        #     .set_fill(blue_color, opacity=1).set_stroke(black_color, width=1)
-        # sphere2.rotate_about_origin(PI/2, RIGHT).shift(screen_witdth/4*RIGHT)
+        text1 = Tex(r"¿Qué es la paridad?").scale_to_fit_width(10)
+        text2 = Tex(r"Primero necesitamos entender qué es una simetría").next_to(text1, DOWN, buff=0.5)
 
-        # axis_start = sphere2.get_center() - UP * 1.6
-        # axis_end = sphere2.get_center() + UP * 1.6
-        # axis_line2 = DashedLine(axis_start, axis_end, dash_length=0.08).set_stroke(black_color, width=2)
-        # axis_arrow2 = Arrow(start=sphere2.get_center() + DOWN * 1.1, end=sphere2.get_center() + DOWN * 1.6, buff=0, tip_length=0.2)\
-        #     .set_fill(black_color).set_stroke(width=0)
+        self.play(Write(text1))
+        self.next_slide()
+        self.play(Write(text2))
 
-        # # Create 3D coordinate axes on the right side (mirror image reflected on y-z plane)
-        # right_axes = ThreeDAxes(
-        #     x_length=1,
-        #     y_length=1,
-        #     z_length=1,
-        #     x_range=[-1, 0],
-        #     y_range=[0, 1],
-        #     z_range=[0, 1],
-        #     axis_config={"color": black_color, "stroke_width": 2},
-        #     tips=False
-        # ).scale(0.4)
-        # right_axes.move_to(1.2*RIGHT)
+        self.next_slide()
+        self.fadeout_all()
 
-        # self.play(FadeIn(sphere2),
-        #           Create(right_axes), run_time = 0.3)
+        square = Square(side_length=2, color = black_color, fill_color = blue_color, fill_opacity = 1)
+        triangl = Triangle(color = black_color, fill_color = blue_color, fill_opacity = 1).scale_to_fit_width(2)
+        circl = Circle(radius=1, color = black_color, fill_color = blue_color, fill_opacity = 1)
 
-        # self.next_slide(loop = True)
-        # self.play(
-        #     Rotate(sphere, angle=TAU, axis=UP),
-        #     Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
-        # )
+        objs = VGroup(circl, square, triangl).arrange(RIGHT, buff = 1.5)
 
-        # self.next_slide(loop = True)
-        # self.add(axis_line, axis_arrow)
-        # self.play(
-        #     Rotate(sphere, angle=TAU, axis=UP),
-        #     Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
-        # )
+        self.play(Create(objs))
+        self.next_slide()
 
-        # self.next_slide(loop = True)
-        # self.add(axis_line2, axis_arrow2)
-        # self.play(
-        #     Rotate(sphere, angle=TAU, axis=UP),
-        #     Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
-        # )
+        def make_ccw_arrow(center_point, radius=0.6, start_angle=-PI/4, angle=PI*1.7):
+            arc = Arc(radius=radius, start_angle=start_angle, angle=angle)
+            arc.set_stroke(black_color, width=3)
+            # center the arc at the target center
+            arc.move_to(center_point)
+            # compute tangent at end to place arrow tip
+            p_end = arc.get_end()
+            p_before = arc.point_from_proportion(0.98)
+            direction = p_end - p_before
+            ang = np.arctan2(direction[1], direction[0])
+            tip = Triangle().scale(0.12).set_fill(black_color, opacity=1).set_stroke(width=0)
+            tip.move_to(p_end)
+            tip.set_angle(ang)
+            tip.shift(direction / np.linalg.norm(direction) * 0.05)
+            return VGroup(arc, tip)
+
+        arrow1 = make_ccw_arrow(square.get_center(), radius=0.3)
+        arrow2 = make_ccw_arrow(circl.get_center(), radius=0.3)
+        arrow3 = make_ccw_arrow(triangl.get_center_of_mass(), radius=0.3)
+
+        self.play(FadeIn(arrow1, run_time=0.18), FadeIn(arrow2, run_time=0.18), FadeIn(arrow3, run_time=0.18))
+        self.play(Rotate(square, PI / 2),
+                  Rotate(triangl, PI / 2, about_point=triangl.get_center_of_mass()),
+                  Rotate(circl, PI / 2))
+        self.play(FadeOut(arrow1, run_time=0.18), FadeOut(arrow2, run_time=0.18), FadeOut(arrow3, run_time=0.18))
+
+        self.next_slide()
+        # Dashed horizontal axis (x-axis) through each object's center for reflection
+        dash1 = DashedLine(square.get_center() + LEFT * 1.5, square.get_center() + RIGHT * 1.5, dash_length=0.08)
+        dash2 = DashedLine(circl.get_center() + LEFT * 1.5, circl.get_center() + RIGHT * 1.5, dash_length=0.08)
+        dash3 = DashedLine(triangl.get_center_of_mass() + LEFT * 1.5, triangl.get_center_of_mass() + RIGHT * 1.5, dash_length=0.08)
+        for d in (dash1, dash2, dash3):
+            d.set_stroke(black_color, width=2)
+
+        self.play(FadeIn(dash1, run_time=0.12), FadeIn(dash2, run_time=0.12), FadeIn(dash3, run_time=0.12))
+        self.play(square.animate.apply_matrix(np.array([[1, 0], [0, -1]])),
+                  triangl.animate.apply_matrix(np.array([[1, 0], [0, -1]]), about_point=triangl.get_center_of_mass()),
+                  circl.animate.apply_matrix(np.array([[1, 0], [0, -1]])))
+        self.play(FadeOut(dash1, run_time=0.12), FadeOut(dash2, run_time=0.12), FadeOut(dash3, run_time=0.12))
+
+        self.next_slide()
+        # Dashed diagonal axis (y = x) through each object's center for reflection
+        diag_vec = (RIGHT + UP)
+        diag1 = DashedLine(square.get_center() - diag_vec * 1.5, square.get_center() + diag_vec * 1.5, dash_length=0.08)
+        diag2 = DashedLine(circl.get_center() - diag_vec * 1.5, circl.get_center() + diag_vec * 1.5, dash_length=0.08)
+        diag3 = DashedLine(triangl.get_center_of_mass() - diag_vec * 1.5, triangl.get_center_of_mass() + diag_vec * 1.5, dash_length=0.08)
+        for d in (diag1, diag2, diag3):
+            d.set_stroke(black_color, width=2)
+
+        self.play(FadeIn(diag1, run_time=0.12), FadeIn(diag2, run_time=0.12), FadeIn(diag3, run_time=0.12))
+        self.play(square.animate.apply_matrix(np.array([[0, 1], [1, 0]]), about_point=square.get_center()),
+                  triangl.animate.apply_matrix(np.array([[0, 1], [1, 0]]), about_point=triangl.get_center_of_mass()),
+                  circl.animate.apply_matrix(np.array([[0, 1], [1, 0]]), about_point=circl.get_center()))
+        self.play(FadeOut(diag1, run_time=0.12), FadeOut(diag2, run_time=0.12), FadeOut(diag3, run_time=0.12))
+
+        self.next_slide()
+        self.fadeout_all()
+
+        # -----------------------------------------------
+        #              Paridad en la física
+        # -----------------------------------------------
+
+        self.set_camera_orientation(phi=-25*DEGREES)
+
+        left_axes = ThreeDAxes(
+            x_length=3,
+            y_length=3,
+            z_length=3,
+            x_range=[0, 3],
+            y_range=[0, 3],
+            z_range=[0, 3],
+            axis_config={"color": black_color, "stroke_width": 2}
+        ).shift(3*LEFT)
+
+        right_axes = ThreeDAxes(
+            x_length=3,
+            y_length=3,
+            z_length=3,
+            x_range=[0, 3],
+            y_range=[0, 3],
+            z_range=[0, 3],
+            axis_config={"color": black_color, "stroke_width": 2}
+        ).shift(3 *RIGHT)
+
+        self.play(Create(left_axes), Create(right_axes))
+
+        self.next_slide()
+        self.play(right_axes.animate.apply_matrix(np.array([[-1, 0, 0], [0, -1, 0], [0, 0, -1]]), about_point=right_axes.get_center()))
+
+        self.next_slide()
+        self.remove(right_axes)
+        right_axes = ThreeDAxes(
+            x_length=3,
+            y_length=3,
+            z_length=3,
+            x_range=[0, 3],
+            y_range=[0, 3],
+            z_range=[0, 3],
+            axis_config={"color": black_color, "stroke_width": 2}
+        ).shift(3 *RIGHT)
+
+        self.add(right_axes)
+
+        self.next_slide()
+        self.play(right_axes.animate.apply_matrix(np.array([[-1, 0, 0], [0, 1, 0], [0, 0, 1]]), about_point=right_axes.get_center()))
+        self.play(Rotate(right_axes, angle=PI, axis=RIGHT))
+
+        self.next_slide()
+        self.fadeout_all()
+
+        # -----------------------------------------------
+        #              ROTATING 3D SPHERE
+        # -----------------------------------------------
+
+        self.renderer.camera.light_source.move_to(3*IN) # changes the source of the light
+
+        self.next_slide()
+        # Move camera to view from above
+        self.set_camera_orientation(phi=-25*DEGREES)
+        sphere = Sphere(radius=1, resolution=(12, 12))\
+            .set_fill(blue_color, opacity=1).set_stroke(black_color, width=1)
+        sphere.rotate_about_origin(PI/2, RIGHT)
+
+        self.play(FadeIn(sphere))
+
+        self.next_slide(loop = True)
+        self.play(Rotate(sphere, angle=TAU, axis=UP), run_time=2, rate_func=linear)
+
+        self.next_slide()
+        self.play(
+            sphere.animate.shift(screen_witdth/4*LEFT)
+        )
+
+        # Axis indicator: vertical dashed line with an arrow at the top
+        axis_start = sphere.get_center() - UP * 1.6
+        axis_end = sphere.get_center() + UP * 1.6
+        axis_line = DashedLine(axis_start, axis_end, dash_length=0.08).set_stroke(black_color, width=2)
+        axis_arrow = Arrow(start=sphere.get_center() + UP * 1.1, end=sphere.get_center() + UP * 1.6, buff=0, tip_length=0.2)\
+            .set_fill(black_color).set_stroke(width=0)
+        
+        self.play(Create(Line(10*UP, 10*DOWN)))
+
+        # Create 3D coordinate axes on the left side of the white line
+        left_axes = ThreeDAxes(
+            x_length=1,
+            y_length=1,
+            z_length=1,
+            x_range=[0, 1],
+            y_range=[0, 1],
+            z_range=[0, 1],
+            axis_config={"color": black_color, "stroke_width": 2},
+            tips=False
+        ).scale(0.4)
+        left_axes.move_to(1.2*LEFT)
+
+        self.play(Create(left_axes), run_time = 0.3)
+
+        sphere2 = Sphere(radius=1, resolution=(12, 12))\
+            .set_fill(blue_color, opacity=1).set_stroke(black_color, width=1)
+        sphere2.rotate_about_origin(PI/2, RIGHT).shift(screen_witdth/4*RIGHT)
+
+        axis_start = sphere2.get_center() - UP * 1.6
+        axis_end = sphere2.get_center() + UP * 1.6
+        axis_line2 = DashedLine(axis_start, axis_end, dash_length=0.08).set_stroke(black_color, width=2)
+        axis_arrow2 = Arrow(start=sphere2.get_center() + DOWN * 1.1, end=sphere2.get_center() + DOWN * 1.6, buff=0, tip_length=0.2)\
+            .set_fill(black_color).set_stroke(width=0)
+
+        # Create 3D coordinate axes on the right side (mirror image reflected on y-z plane)
+        right_axes = ThreeDAxes(
+            x_length=1,
+            y_length=1,
+            z_length=1,
+            x_range=[-1, 0],
+            y_range=[0, 1],
+            z_range=[0, 1],
+            axis_config={"color": black_color, "stroke_width": 2},
+            tips=False
+        ).scale(0.4)
+        right_axes.move_to(1.2*RIGHT)
+
+        self.play(FadeIn(sphere2),
+                  Create(right_axes), run_time = 0.3)
+
+        self.next_slide(loop = True)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
+        )
+
+        self.next_slide(loop = True)
+        self.add(axis_line, axis_arrow)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
+        )
+
+        self.next_slide(loop = True)
+        self.add(axis_line2, axis_arrow2)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
+        )
         
 
-        # self.next_slide()
-        # self.play(
-        #     Rotate(sphere2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
-        #     Rotate(axis_line2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
-        #     Rotate(axis_arrow2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center())
-        # )
+        self.next_slide()
+        self.play(
+            Rotate(sphere2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+            Rotate(axis_line2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+            Rotate(axis_arrow2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center())
+        )
 
-        # self.next_slide(loop = True)
-        # self.play(
-        #     Rotate(sphere, angle=TAU, axis=UP),
-        #     Rotate(sphere2, angle=TAU, axis=UP), run_time=2, rate_func=linear
-        # )
+        self.next_slide(loop = True)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=TAU, axis=UP), run_time=2, rate_func=linear
+        )
 
-        # self.next_slide()
-        # self.play(FadeOut(sphere2), FadeOut(axis_line2), FadeOut(axis_arrow2))
+        self.next_slide()
+        self.play(FadeOut(sphere2), FadeOut(axis_line2), FadeOut(axis_arrow2))
 
-        # self.next_slide(loop = True)
+        self.next_slide(loop = True)
         
-        # econe = Cone(base_radius=1, height=2, direction=DOWN, fill_color=red_color, )\
-        #     .rotate(PI, RIGHT).move_to(sphere.get_bottom()).shift(-Y_AXIS-0.5*X_AXIS)
+        econe = Cone(base_radius=1, height=2, direction=DOWN, fill_color=red_color, )\
+            .rotate(PI, RIGHT).move_to(sphere.get_bottom()).shift(-Y_AXIS-0.5*X_AXIS)
         
-        # econe2 = Cone(base_radius=1, height=2, direction=DOWN, fill_color=red_color)\
-        #     .rotate(PI, RIGHT).move_to(sphere2.get_bottom()).shift(-Y_AXIS-0.5*X_AXIS)
+        econe2 = Cone(base_radius=1, height=2, direction=DOWN, fill_color=red_color)\
+            .rotate(PI, RIGHT).move_to(sphere2.get_bottom()).shift(-Y_AXIS-0.5*X_AXIS)
         
-        # self.add(econe)
-        # self.play(Rotate(sphere, angle=TAU, axis=UP), run_time=2, rate_func=linear)
+        self.add(econe)
+        self.play(Rotate(sphere, angle=TAU, axis=UP), run_time=2, rate_func=linear)
 
-        # self.next_slide(loop = True)
+        self.next_slide(loop = True)
 
-        # axis_line2 = DashedLine(axis_start, axis_end, dash_length=0.08).set_stroke(black_color, width=2)
-        # axis_arrow2 = Arrow(start=sphere2.get_center() + DOWN * 1.1, end=sphere2.get_center() + DOWN * 1.6, buff=0, tip_length=0.2)\
-        #     .set_fill(black_color).set_stroke(width=0)
+        axis_line2 = DashedLine(axis_start, axis_end, dash_length=0.08).set_stroke(black_color, width=2)
+        axis_arrow2 = Arrow(start=sphere2.get_center() + DOWN * 1.1, end=sphere2.get_center() + DOWN * 1.6, buff=0, tip_length=0.2)\
+            .set_fill(black_color).set_stroke(width=0)
         
-        # self.add(sphere2, axis_arrow2, axis_line2)
-        # self.play(
-        #     Rotate(sphere, angle=TAU, axis=UP),
-        #     Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear)
+        self.add(sphere2, axis_arrow2, axis_line2)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear)
         
-        # self.next_slide(loop = True)
-        # self.add(econe2)
-        # self.play(
-        #     Rotate(sphere, angle=TAU, axis=UP),
-        #     Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
-        # )
+        self.next_slide(loop = True)
+        self.add(econe2)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=-TAU, axis=UP), run_time=2, rate_func=linear
+        )
 
-        # self.next_slide()
-        # self.play(
-        #     Rotate(sphere2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
-        #     Rotate(econe2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
-        #     Rotate(axis_arrow2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
-        #     Rotate(axis_line2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
-        # )
+        self.next_slide()
+        self.play(
+            Rotate(sphere2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+            Rotate(econe2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+            Rotate(axis_arrow2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+            Rotate(axis_line2, angle=-PI, axis=RIGHT, about_point=sphere2.get_center()),
+        )
 
-        # self.next_slide(loop = True)
-        # self.play(
-        #     Rotate(sphere, angle=TAU, axis=UP),
-        #     Rotate(sphere2, angle=TAU, axis=UP),
-        #     run_time=2, rate_func=linear
-        # )
+        self.next_slide(loop = True)
+        self.play(
+            Rotate(sphere, angle=TAU, axis=UP),
+            Rotate(sphere2, angle=TAU, axis=UP),
+            run_time=2, rate_func=linear
+        )
