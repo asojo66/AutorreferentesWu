@@ -89,6 +89,7 @@ class Wu(ThreeDSlide):
         # -----------------------------------------------
 
         title = Title("China, 1912")
+        title.underline.set_color(black_color)
 
         self.next_slide()
         self.fadeout_all()
@@ -173,6 +174,247 @@ class Wu(ThreeDSlide):
 
         # -----------------------------------------------
         #               EARLY LIFE: SCHOOL AND HIGH SCHOOL
+        # -----------------------------------------------
+
+        self.next_slide()
+
+        school_img = ImageMobject("./assets/school.png").scale_to_fit_height(4.5)
+        school = Group(
+            school_img,
+            Tex("Escuela de niñas Ming De. Fundada por su padre.").next_to(school_img, DOWN, buff=0.25)
+        )
+
+        more_data = BulletedList(
+            " Escuchaba a su padre leer artículos de ciencia en voz alta",
+            " Prefería escuchar la radio a jugar con otros niños"
+        ).next_to(school, DOWN, buff=0.5)
+
+        schoolslide = Group(school, more_data).next_to(fatherlist, LEFT, buff = 4)
+        everything.add(schoolslide)
+
+        self.remove(arrow)
+        self.add(school)
+        self.play(everything.animate.move_to(-schoolslide.get_center()/2))
+
+        # -----------------------------------------------
+        #                   High school
+        # -----------------------------------------------
+
+        self.next_slide()
+
+        text1 = Tex(r"Con solo \textbf{11 años}:")
+        text12 = Tex(r"Se matricula en la Escuela de mujeres de Suzhou ($80$ km)").scale(0.8)
+        text2 = Tex(r"Se gradua con el mejor expediente en 1929").scale(0.8)
+        text3 = Tex(r"Aquí descubre la ciencia de primera mano").scale(0.8)
+        text4 = Tex(r"Fue admitida en la Universidad Nacional Central").scale(1.1)
+
+        texts = VGroup(text1, text12, text2, text3, text4).arrange(DOWN, buff=0.5)
+        text1.to_edge(LEFT, buff=0.5)
+        text12.to_edge(LEFT, buff=2)
+        text2.to_edge(LEFT, buff=2)
+        text3.to_edge(LEFT, buff=2)
+        text4.shift(0.25*DOWN)
+
+        texts.next_to(more_data, DOWN, buff=1.5)
+
+        line1 = Line(more_data.get_bottom()+0.25*DOWN, texts.get_top()+0.25*UP, color=black_color, stroke_width=4)
+
+        everything.add(texts, line1)
+
+        self.play(Create(line1), Write(texts), everything.animate.shift(schoolslide.get_center()-texts.get_center()))
+
+        self.next_slide()
+        self.fadeout_all()
+
+        question1 = Tex(r"¿Qué opinais sobre la educación que recibió Wu?").scale_to_fit_width(10)
+
+        self.play(Write(question1))
+
+        # -----------------------------------------------
+        #                 University
+        # -----------------------------------------------
+
+        self.next_slide()
+        self.fadeout_all()
+
+        title = Title("Universidad Nacional Central")
+        title.underline.set_color(black_color)
+        university_img = ImageMobject("./assets/universidad_build.jpg").scale_to_fit_height(3.5).next_to(title, DOWN, buff=0.5)
+
+        math_symbol = MathTex(r"\pi").scale_to_fit_height(0.5)
+        physics_symbol = MathTex("F = ma").scale_to_fit_height(0.5)
+
+        subjects = VGroup(
+            math_symbol,
+            physics_symbol
+        ).arrange(RIGHT, buff=2).next_to(university_img, DOWN, buff = 0.5)
+
+        arrow = Arrow(math_symbol.get_right()+0.25*RIGHT, physics_symbol.get_left()+0.25*LEFT).set_color(black_color)
+
+        text1 = Tex(r"Fue líder politica en la universidad").to_edge(DOWN, buff=0.25)
+
+        self.play(Write(title), FadeIn(university_img))
+        self.next_slide()
+        self.play(Create(subjects), Create(arrow))
+        self.next_slide()
+        self.play(Write(text1))
+
+        self.next_slide()
+        self.fadeout_all()
+
+        university_img2 = ImageMobject("./assets/universidad.jpg").scale_to_fit_width(12).center()
+        self.play(FadeIn(university_img2))
+
+        self.next_slide()
+        self.fadeout_all()
+
+        title = Title("Universidad de Zhejiang y Academia Sinica")
+        title.underline.set_color(black_color)
+        self.play(Write(title))
+
+        text1 = Tex(r"1. Se traslada a la Universidad de Zhejiang en 1934 como profesora").scale(0.8)
+        text2 = Tex(r"2. Trabaja en el Instituto de Física de la Academia Sinica").scale(0.8)
+        text3 = Tex(r"Su supervisora Gu Jien-Wei, \\ le recomienda doctorarse en \textbf{Michigan}").scale(0.8)
+
+        VGroup(text1, text2, text3).arrange(DOWN, buff=0.5).center()
+        text1.to_edge(LEFT, buff=0.5)
+        text2.to_edge(LEFT, buff=0.5)
+
+        self.next_slide()
+        self.play(Write(text1))
+        self.next_slide()
+        self.play(Write(text2))
+        self.next_slide()
+        self.play(Write(text3))
+
+
+        # -----------------------------------------------
+        #                    Viaje a Usa
+        # -----------------------------------------------
+
+        title = Title("Viaje a USA, 1936")
+        title.underline.set_color(black_color)
+
+        self.next_slide()
+        self.fadeout_all()
+
+        worldmap = SVGMobject("./assets/world_usa.svg").scale_to_fit_height(8)
+        self.play(FadeIn(worldmap))
+
+        self.next_slide()
+        tio = ImageMobject("./assets/tio.png").scale_to_fit_height(3).to_edge(DOWN, buff=0.5).shift(2*LEFT)
+        amigas = ImageMobject("./assets/amigas.png").scale_to_fit_height(3).to_edge(DOWN, buff=0.5).shift(2*RIGHT)
+
+        self.play(FadeIn(tio))
+
+        self.next_slide()
+        self.play(FadeIn(amigas))
+
+        self.next_slide()
+        self.remove_all()
+
+        self.next_slide()
+        text1 = Tex("¿Cuál es la impresión que se lleva al llegar?").scale_to_fit_width(12)
+        self.play(Write(text1))
+        text2 = Tex(r"Wu se sorprendió por el sexismo en la sociedad estadounidense.").scale(0.8).next_to(text1, DOWN, buff=0.5)
+        text3 = Tex(r"Dejó Michigan y volvió a Berkeley").scale(0.8).next_to(text1, DOWN, buff=0.5)
+        self.next_slide()
+        self.play(Write(text2))
+        self.next_slide()
+        self.play(ReplacementTransform(text2, text3))
+
+        self.next_slide()
+        self.remove_all()
+
+        # -----------------------------------------------
+        #                 RESEARCH CAREER
+        # -----------------------------------------------
+
+        title = Title("Carrera investigadora")
+        title.underline.set_color(black_color)
+
+        self.play(Write(title))
+
+        text1 = Tex(r"1. \textbf{Berkeley} - Ernest O. Lawrence y Emilio Segrè (\textbf{Nobel 1939 y 1959})")
+        text2 = Tex(r"a. Radiación de frenado (bremsstrahlung)").scale(0.8)
+        text3 = Tex(r"b. Producción de isótopos radiactivos Xe").scale(0.8)
+
+        text4 = Tex(r"Tras problemas por su raza y género").scale(0.9)
+
+        text5 = Tex(r"2. \textbf{Princeton y Proyecto Manhatan}")
+        text6 = Tex(r"a. Se casa con Yuan Jialiu (Sin familia por WWII)").scale(0.8)
+        text7 = Tex(r"b. Descubre el envenenamiento por Xe-$135$").scale(0.8)
+
+        text8 = Tex(r"Le ofrecen un puesto de profesora asociada").scale(0.9)
+
+        text9 = Tex(r"3. \textbf{Columbia} (NY) - Primera profesora titular mujer")
+        text10 = Tex(r"a. Pionera del entrelazamiento cuántico").scale(0.8)
+        text11 = Tex(r"b. Acaba la WWII pero comienza la guerra civil China").scale(0.8)
+
+        VGroup(title, text1, text2, text3, text4, text5, text6, text7, text8, text9, text10, text11).arrange(DOWN, buff=0.5).to_edge(LEFT, buff=0.5).scale_to_fit_height(7.5)
+        text1.to_edge(LEFT, buff=0.5)
+        text2.to_edge(LEFT, buff=1.5)
+        text3.to_edge(LEFT, buff=1.5)
+        text5.to_edge(LEFT, buff=0.5)
+        text6.to_edge(LEFT, buff=1.5)
+        text7.to_edge(LEFT, buff=1.5)
+        text9.to_edge(LEFT, buff=0.5)
+        text10.to_edge(LEFT, buff=1.5)
+        text11.to_edge(LEFT, buff=1.5)
+
+        title.shift(title.get_center()[0]*LEFT)
+
+        self.play(Write(text1), Write(text2), Write(text3))
+        self.next_slide()
+        self.play(Write(text4))
+        self.next_slide()
+        self.play(Write(text5), Write(text6), Write(text7))
+        self.next_slide()
+        self.play(Write(text8), Write(text9), Write(text10))
+
+        # -----------------------------------------------
+        #               Comienza su fama
+        # -----------------------------------------------
+
+        self.next_slide()
+        self.fadeout_all()
+
+        title = Title("Comienza su fama")
+        title.underline.set_color(black_color)
+        
+
+        text1 = Tex(r"Fermi (1934) propone su teoría para la $\beta^-$")
+        betam = MathTex(r"n \rightarrow p + e^- + \bar{\nu}_e")
+        text2 = Tex(r"Luis Alvarez obtiene resultados que no encajan")
+        text3 = Tex(r"Se interesa en ella desde Berkeley")
+        text4 = Tex(r"En 1949 realiza confirmaciones empiricas que:")
+        text5 = Tex(r"1. Confirma la teoría de Fermi").scale(0.8)
+        text6 = Tex(r"2. Descubre error en los cálculos de Alvarez").scale(0.8)
+        text7 = Tex(r"Se posiciona como la \# 1 en $\beta^-$").scale(1.2)
+
+        VGroup(title, text1, betam, text2, text3, text4, text5, text6, text7).arrange(DOWN, buff=0.5).to_edge(LEFT, buff=0.5).scale_to_fit_height(7.5)
+        text1.to_edge(LEFT, buff=0.5)
+        text2.to_edge(LEFT, buff=0.5)
+        text3.to_edge(LEFT, buff=0.5)
+        text4.to_edge(LEFT, buff=0.5)
+        text5.to_edge(LEFT, buff=1.5)
+        text6.to_edge(LEFT, buff=1.5)
+
+        title.shift(title.get_center()[0]*LEFT)
+
+        self.play(Write(title))
+        self.play(Write(text1))
+        self.next_slide()
+        self.play(Write(betam), Write(text2))
+        self.next_slide()
+        self.play(Write(text3), Write(text4))
+        self.next_slide()
+        self.play(Write(text5), Write(text6))
+        self.next_slide()
+        self.play(Write(text7))
+
+        # -----------------------------------------------
+        #       Teoría Tsung-Dao Lee y Chen-Ning Yang
         # -----------------------------------------------
 
         # # -----------------------------------------------
