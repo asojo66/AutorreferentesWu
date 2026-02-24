@@ -333,8 +333,6 @@ class Wu(ThreeDSlide):
         title = Title("Carrera investigadora")
         title.underline.set_color(black_color)
 
-        self.play(Write(title))
-
         text1 = Tex(r"1. \textbf{Berkeley} - Ernest O. Lawrence y Emilio Segrè (\textbf{Nobel 1939 y 1959})")
         text2 = Tex(r"a. Radiación de frenado (bremsstrahlung)").scale(0.8)
         text3 = Tex(r"b. Producción de isótopos radiactivos Xe").scale(0.8)
@@ -364,13 +362,14 @@ class Wu(ThreeDSlide):
 
         title.shift(title.get_center()[0]*LEFT)
 
+        self.play(Write(title))
         self.play(Write(text1), Write(text2), Write(text3))
         self.next_slide()
         self.play(Write(text4))
         self.next_slide()
         self.play(Write(text5), Write(text6), Write(text7))
         self.next_slide()
-        self.play(Write(text8), Write(text9), Write(text10))
+        self.play(Write(text8), Write(text9), Write(text10), Write(text11))
 
         # -----------------------------------------------
         #               Comienza su fama
@@ -385,11 +384,11 @@ class Wu(ThreeDSlide):
 
         text1 = Tex(r"Fermi (1934) propone su teoría para la $\beta^-$")
         betam = MathTex(r"n \rightarrow p + e^- + \bar{\nu}_e")
-        text2 = Tex(r"Luis Alvarez obtiene resultados que no encajan")
-        text3 = Tex(r"Se interesa en ella desde Berkeley")
-        text4 = Tex(r"En 1949 realiza confirmaciones empiricas que:")
+        text2 = Tex(r"Luis W. Álvarez (Nobel 1968) obtiene resultados que no encajan")
+        text3 = Tex(r"Wu se interesa en la $\beta^-$ desde Berkeley")
+        text4 = Tex(r"En 1949 realiza confirmaciones empíricas que:")
         text5 = Tex(r"1. Confirma la teoría de Fermi").scale(0.8)
-        text6 = Tex(r"2. Descubre error en los cálculos de Alvarez").scale(0.8)
+        text6 = Tex(r"2. Descubre errores en los cálculos de Álvarez").scale(0.8)
         text7 = Tex(r"Se posiciona como la \# 1 en $\beta^-$").scale(1.2)
 
         VGroup(title, text1, betam, text2, text3, text4, text5, text6, text7).arrange(DOWN, buff=0.5).to_edge(LEFT, buff=0.5).scale_to_fit_height(7.5)
@@ -424,9 +423,9 @@ class Wu(ThreeDSlide):
         title.underline.set_color(black_color)
         lee = ImageMobject("./assets/lee.jpg").scale_to_fit_height(3)
         yang = ImageMobject("./assets/yang.jpg").scale_to_fit_height(3)
-        text1 = Tex(r"La paridad se converva en las fuerzas fuertes y electromagnéticas").scale(0.8)
+        text1 = Tex(r"La paridad se conserva en las fuerzas fuertes y electromagnéticas").scale(0.8)
         text2 = Tex(r"Pero no en la débil...").scale(0.8)
-        text3 = Tex(r"Proponen un experimento a Wu, a la que le precede la fama").scale(0.8)
+        text3 = Tex(r"Proponen un experimento a Wu, a la que ya le precede la fama").scale(0.8)
 
         photos = Group(lee, yang).arrange(RIGHT, buff=2.5)
 
@@ -437,7 +436,6 @@ class Wu(ThreeDSlide):
             text3
         ).arrange(DOWN, buff = 0.5).shift(0.5*DOWN)
         
-        self.next_slide()
         self.play(Write(title))
         self.next_slide()
         self.play(FadeIn(photos))
@@ -578,33 +576,61 @@ class Wu(ThreeDSlide):
         self.add(right_axes)
 
         self.next_slide()
+        self.wait(0.1)
+        self.next_slide()
         self.play(right_axes.animate.apply_matrix(np.array([[-1, 0, 0], [0, 1, 0], [0, 0, 1]]), about_point=right_axes.get_center()))
+        self.next_slide()
         self.play(Rotate(right_axes, angle=PI, axis=RIGHT))
 
         self.next_slide()
         self.fadeout_all()
 
         # -----------------------------------------------
-        #              ROTATING 3D SPHERE
+        #            El experimento 
         # -----------------------------------------------
+
+        title = Title("El experimento de Wu")
+        title.underline.set_color(black_color)
+
+        reaction = MathTex(r"{}^{60}_{27} Co", r"\rightarrow ",r"{}^{60}_{28} Ni",r"+ ",r"e^-",r" + \bar{\nu}_e").next_to(title, DOWN, buff=0.5)
+
+        self.play(Write(title))
+        self.next_slide()
+        self.play(Write(reaction))
 
         self.renderer.camera.light_source.move_to(3*IN) # changes the source of the light
 
-        self.next_slide()
         # Move camera to view from above
         self.set_camera_orientation(phi=-25*DEGREES)
         sphere = Sphere(radius=1, resolution=(12, 12))\
             .set_fill(blue_color, opacity=1).set_stroke(black_color, width=1)
-        sphere.rotate_about_origin(PI/2, RIGHT)
+        sphere.rotate_about_origin(PI/2, RIGHT).shift(1.5*DOWN)
 
         self.play(FadeIn(sphere))
 
         self.next_slide(loop = True)
         self.play(Rotate(sphere, angle=TAU, axis=UP), run_time=2, rate_func=linear)
 
+        econe = Cone(base_radius=1/2, height=1.5, direction=DOWN, fill_color=red_color, )\
+            .rotate(PI, RIGHT).move_to(sphere.get_bottom()).shift(-0.8*Y_AXIS-0.5*X_AXIS).set_opacity(0.5)
+        
+        econe2 = Cone(base_radius=1/2, height=1.5, direction=UP, fill_color=red_color, )\
+            .rotate(PI, RIGHT).move_to(sphere.get_top()).shift(0.8*Y_AXIS-0.5*X_AXIS).set_opacity(0.5)
+        
+        self.next_slide(loop = True)
+
+        self.add(econe, econe2)
+        reaction[0].set_color(blue_color)
+        reaction[2].set_color(blue_color)
+        reaction[4].set_color(red_color)
+
+        self.play(Rotate(sphere, angle=TAU, axis=UP), run_time=2, rate_func=linear)
+
         self.next_slide()
+
         self.play(
-            sphere.animate.shift(screen_witdth/4*LEFT)
+            FadeOut(title), FadeOut(reaction), FadeOut(econe), FadeOut(econe2),
+            sphere.animate.move_to(screen_witdth/4*LEFT)
         )
 
         # Axis indicator: vertical dashed line with an arrow at the top
@@ -614,7 +640,7 @@ class Wu(ThreeDSlide):
         axis_arrow = Arrow(start=sphere.get_center() + UP * 1.1, end=sphere.get_center() + UP * 1.6, buff=0, tip_length=0.2)\
             .set_fill(black_color).set_stroke(width=0)
         
-        self.play(Create(Line(10*UP, 10*DOWN)))
+        self.play(Create(Line(10*UP, 10*DOWN).set_color(black_color)))
 
         # Create 3D coordinate axes on the left side of the white line
         left_axes = ThreeDAxes(
@@ -696,11 +722,11 @@ class Wu(ThreeDSlide):
 
         self.next_slide(loop = True)
         
-        econe = Cone(base_radius=1, height=2, direction=DOWN, fill_color=red_color, )\
-            .rotate(PI, RIGHT).move_to(sphere.get_bottom()).shift(-Y_AXIS-0.5*X_AXIS)
+        econe = Cone(base_radius=1, height=3, direction=DOWN, fill_color=red_color, )\
+            .rotate(PI, RIGHT).move_to(sphere.get_bottom()).shift(-Y_AXIS-X_AXIS).set_opacity(0.5)
         
-        econe2 = Cone(base_radius=1, height=2, direction=DOWN, fill_color=red_color)\
-            .rotate(PI, RIGHT).move_to(sphere2.get_bottom()).shift(-Y_AXIS-0.5*X_AXIS)
+        econe2 = Cone(base_radius=1, height=3, direction=DOWN, fill_color=red_color)\
+            .rotate(PI, RIGHT).move_to(sphere2.get_bottom()).shift(-Y_AXIS-X_AXIS).set_opacity(0.5)
         
         self.add(econe)
         self.play(Rotate(sphere, angle=TAU, axis=UP), run_time=2, rate_func=linear)
@@ -737,3 +763,115 @@ class Wu(ThreeDSlide):
             Rotate(sphere2, angle=TAU, axis=UP),
             run_time=2, rate_func=linear
         )
+
+        self.next_slide()
+        self.fadeout_all()
+
+        # -----------------------------------------------
+        #               El experimento 2
+        # -----------------------------------------------
+
+        self.set_camera_orientation(phi=0)
+
+        title = Title("El experimento de Wu")
+        title.underline.set_color(black_color)
+
+        text1 = Tex(r"¿Cómo se realizó el experimento?").scale_to_fit_width(10)
+        text2 = Tex(r"1. Se enfría el Co-$60$ a $0.01$ K").scale(0.8)
+        text3 = Tex(r"2. Se aplica un campo magnético $1$ T para alinear los espines").scale(0.8)
+        text4 = Tex(r"3. Se mide la dirección de emisión de los electrones").scale(0.8)
+        text5 = Tex(r"4. Se repite el experimento con el campo magnético invertido").scale(0.8)
+
+        VGroup(title, text1, text2, text3, text4, text5).arrange(DOWN, buff=0.5)
+        text2.to_edge(LEFT, buff=1.5)
+        text3.to_edge(LEFT, buff=1.5)
+        text4.to_edge(LEFT, buff=1.5)
+        text5.to_edge(LEFT, buff=1.5)
+
+        self.play(Write(title))
+        self.next_slide()
+        self.play(Write(text1))
+        self.next_slide()
+        self.play(Write(text2))
+        self.next_slide()
+        self.play(Write(text3))
+        self.next_slide()
+        self.play(Write(text4))
+        self.next_slide()
+        self.play(Write(text5))
+        self.next_slide()
+        self.fadeout_all()
+
+        # -----------------------------------------------
+        #               Resultados y consecuencias
+        # -----------------------------------------------
+
+        title = Title("Premio Nobel")
+        title.underline.set_color(black_color)
+        text1 = Tex(r"El experimento es premiado con un \textbf{premio Nobel} en 1957")
+        text2 = Tex(r"Solo dos de los autores son premiados").scale(0.8)
+        text3 = Tex(r"Más tarde se reconoce a Wu con el premio Wolf en 1978").scale(0.8).to_edge(DOWN, buff=0.5)
+
+        VGroup(text1, text2).arrange(DOWN, buff=0.5)
+
+        self.play(Write(title), Write(text1))
+        self.next_slide()
+        self.play(Write(text2))
+        self.next_slide()
+        self.play(Write(text3))
+
+        self.next_slide()
+        self.fadeout_all()
+
+        # -----------------------------------------------
+        #        Fotos
+        # -----------------------------------------------
+        
+        img1 = ImageMobject("./assets/wu.jpg").scale_to_fit_height(6)
+        img3 = ImageMobject("./assets/wu3.jpg").scale_to_fit_height(6)
+        img2 = ImageMobject("./assets/wu2.png").scale_to_fit_height(3.5)
+
+        Group(img1, img3).arrange(RIGHT, buff=0)
+        img2.to_corner(DR, buff=1)
+
+        self.add(img1, img3, img2)
+        self.wait(0.1)
+
+
+        # -----------------------------------------------
+        #        Fotos
+        # -----------------------------------------------
+        
+        img1 = ImageMobject("./assets/wu.jpg").scale_to_fit_height(6)
+        img3 = ImageMobject("./assets/wu3.jpg").scale_to_fit_height(6)
+        img2 = ImageMobject("./assets/wu2.png").scale_to_fit_height(3.5)
+
+        Group(img1, img3).arrange(RIGHT, buff=0)
+        img2.to_corner(DR, buff=1)
+
+        self.add(img1, img3, img2)
+        self.wait(0.1)
+
+        self.next_slide()
+        self.remove_all()
+
+
+        # -----------------------------------------------
+        #        Despedida y QR
+        # -----------------------------------------------
+
+        text1 = Tex("Gracias por vuestra atención")
+        
+        qr = ImageMobject("./assets/qr.png").scale_to_fit_height(4.5)
+        logo = ImageMobject("./assets/logos/autorreferentes_full.png").scale_to_fit_width(qr.width)
+
+        Group(
+            text1, 
+            Group(
+                logo,
+                qr
+            ).arrange(DOWN, buff=0)
+        ).arrange(DOWN, buff=0.5)
+
+        self.add(text1, logo, qr)
+        self.wait(0.1)
