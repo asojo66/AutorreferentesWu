@@ -40,19 +40,21 @@ class Wu(ThreeDSlide):
         texTemplate = TexTemplate()
         texTemplate.add_to_preamble(r"\usepackage{physics, amsmath, amssymb}")
         
-        self.play(Write(Text("HOLA, SOY INVISIBLE").set_opacity(0)), time = 0.1)
+        invisible = Text("HOLA, SOY INVISIBLE").set_opacity(0)
+
+        self.play(Write(invisible), time = 0.1)
         self.next_slide()
 
         # -----------------------------------------------
         #                  TITLE SCREEN
         # -----------------------------------------------
         
-        title = Tex("Chien-Shiung Wu")
-        subtitle = Tex("La mujer que rompió la simetría").scale(0.85)
-        authors = Tex("Antonio Sojo López").scale(0.7)
+        title = Tex(r"Chien-Shiung Wu")
+        subtitle = Tex(r"La mujer que rompió la simetría").scale(0.85)
+        authors = Tex(r"Antonio Sojo López").scale(0.7)
 
         # Logos 'n' stuff
-        logo_us = ImageMobject("./assets/logos/logo_us.png").scale_to_fit_width(3)
+        logo_us = ImageMobject("./assets/logos/logo_us.png").scale_to_fit_height(1)
         banner_min = ImageMobject("./assets/logos/min_banner.jpg").scale_to_fit_height(1)
         banners = Group(
             ImageMobject("./assets/logos/autorreferentes_full.png").scale_to_fit_height(1)\
@@ -67,13 +69,19 @@ class Wu(ThreeDSlide):
                 Tex("PID2022-136228NB-C22").scale_to_fit_width(banner_min.width)\
                     .next_to(banner_min, DOWN, buff=0.1)
             )
-        ).arrange(RIGHT, buff = 0.5).scale_to_fit_width(13)
+        ).arrange(RIGHT, buff = 0.5).scale_to_fit_width(9)
+        logo_fisica = Group(
+            SVGMobject("./assets/logos/fisica.svg").scale_to_fit_height(1),
+            ImageMobject("./assets/logos/divulgaus.png").scale_to_fit_height(1)
+        ).arrange(RIGHT, buff=2).to_edge(UP, buff = 1)
+
 
         title_screen = VGroup(
             title,
             subtitle,
             authors,
-        ).arrange(DOWN, buff=0.5).shift(1.2*UP)
+        ).arrange(DOWN, buff=0.35)
+        authors.shift(0.15*DOWN)
         banners.to_edge(DOWN, buff = 1)
 
         self.play(
@@ -81,7 +89,8 @@ class Wu(ThreeDSlide):
         )
         self.play(
             Write(authors),
-            FadeIn(banners, shift = UP)
+            FadeIn(banners, shift = UP),
+            FadeIn(logo_fisica, shift = DOWN)
         )
 
         # -----------------------------------------------
