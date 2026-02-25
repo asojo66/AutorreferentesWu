@@ -552,7 +552,10 @@ class Wu(ThreeDSlide):
             x_range=[0, 3],
             y_range=[0, 3],
             z_range=[0, 3],
-            axis_config={"color": black_color, "stroke_width": 2}
+            axis_config={"stroke_width": 2},
+            x_axis_config={"color": RED},
+            y_axis_config={"color": GREEN},
+            z_axis_config={"color": BLUE}
         ).shift(3*LEFT)
 
         right_axes = ThreeDAxes(
@@ -562,7 +565,10 @@ class Wu(ThreeDSlide):
             x_range=[0, 3],
             y_range=[0, 3],
             z_range=[0, 3],
-            axis_config={"color": black_color, "stroke_width": 2}
+            axis_config={"stroke_width": 2},
+            x_axis_config={"color": RED},
+            y_axis_config={"color": GREEN},
+            z_axis_config={"color": BLUE}
         ).shift(3 *RIGHT)
 
         self.play(Create(left_axes), Create(right_axes))
@@ -579,7 +585,10 @@ class Wu(ThreeDSlide):
             x_range=[0, 3],
             y_range=[0, 3],
             z_range=[0, 3],
-            axis_config={"color": black_color, "stroke_width": 2}
+            axis_config={"stroke_width": 2},
+            x_axis_config={"color": RED},
+            y_axis_config={"color": GREEN},
+            z_axis_config={"color": BLUE}
         ).shift(3 *RIGHT)
 
         self.add(right_axes)
@@ -659,7 +668,10 @@ class Wu(ThreeDSlide):
             x_range=[0, 1],
             y_range=[0, 1],
             z_range=[0, 1],
-            axis_config={"color": black_color, "stroke_width": 2},
+            axis_config={"stroke_width": 2},
+            x_axis_config={"color": RED},
+            y_axis_config={"color": GREEN},
+            z_axis_config={"color": BLUE},
             tips=False
         ).scale(0.4)
         left_axes.move_to(1.2*LEFT)
@@ -684,7 +696,10 @@ class Wu(ThreeDSlide):
             x_range=[-1, 0],
             y_range=[0, 1],
             z_range=[0, 1],
-            axis_config={"color": black_color, "stroke_width": 2},
+            axis_config={"stroke_width": 2},
+            x_axis_config={"color": RED},
+            y_axis_config={"color": GREEN},
+            z_axis_config={"color": BLUE},
             tips=False
         ).scale(0.4)
         right_axes.move_to(1.2*RIGHT)
