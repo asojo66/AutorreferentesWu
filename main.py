@@ -35,15 +35,15 @@ class Wu(ThreeDSlide):
 
     def construct(self):
 
-        # Add an empty slide to avoid automatic start
-
         texTemplate = TexTemplate()
         texTemplate.add_to_preamble(r"\usepackage{physics, amsmath, amssymb}")
         
-        invisible = Text("HOLA, SOY INVISIBLE").set_opacity(0)
+        first_slide = ImageMobject("./assets/firstslide.png").scale_to_fit_height(8)
 
-        self.play(Write(invisible), time = 0.1)
+        self.add(first_slide)
+        self.wait(0.1)
         self.next_slide()
+        self.remove_all()
 
         # -----------------------------------------------
         #                  TITLE SCREEN
